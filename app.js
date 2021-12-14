@@ -38,9 +38,9 @@ app.post("/",function(req,res){
     lastName: req.body.lastName,
     email: req.body.email
   };
-
-    const listId = "e3fd95ad8d";
-    const response =  mailchimp.lists.addListMember(listId, {
+async function sendData (){
+   const listId = "e3fd95ad8d";
+    const response = await mailchimp.lists.addListMember(listId, {
       email_address: subscribingUser.email,
       status: "subscribed",
       merge_fields: {
@@ -54,7 +54,8 @@ app.post("/",function(req,res){
      else
      {
        res.sendFile(__dirname + "/Failure.html");
-     }
+     }}
+     sendData();
  
 })
 
